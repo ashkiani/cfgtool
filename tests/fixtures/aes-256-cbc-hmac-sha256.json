@@ -1,0 +1,14 @@
+{
+  "format": "cfgtool-encrypted-config",
+  "version": 1,
+  "payload_format": "json",
+  "cipher": "aes-256-cbc+hmac-sha256",
+  "kdf": {
+    "name": "pbkdf2-sha256",
+    "salt": "Zml4dHVyZS1zYWx0LTAwMQ==",
+    "iterations": 200000
+  },
+  "nonce": "Zml4dHVyZS1ub25jZS0xNg==",
+  "ciphertext": "/3Tnr3iETxeA4/ry6veiged7Lj4iuHhiuu9CHF0yD0iis3vGce+M5cylpojyLyPz1dGnPbLsYKDTtTtQ/LCNqQ==",
+  "tag": "1Tt7xpNQql40x7yV8vEsxMXwEIYyV0lhdRfwYLOclro="
+}
