@@ -28,6 +28,9 @@ rustc-ice-*.txt
 .env
 .env.*
 *.cfg
+*.env
+manual-tests/
+cfgtool.zip
 *.secret
 *.secrets
 *.key

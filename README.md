@@ -23,16 +23,18 @@ cargo build --release
 
 The executable is at `target/release/cfgtool` on Linux or `target\\release\\cfgtool.exe` on Windows.
 
-Run all tests and check code formatting:
+Run the release checks (on Windows or Linux):
 
 ```sh
-cargo test --all-targets
 cargo fmt --all -- --check
+cargo clippy --all-targets --locked -- -D warnings
+cargo test --release --all-targets --locked
+cargo build --release --locked
 ```
 
-If rustfmt reports formatting differences, run `cargo fmt --all` and then rerun the check. To check additional compiler lints: `cargo clippy --all-targets` (requires `rustup component add clippy`).
+Install the `rustfmt` and `clippy` components if your toolchain doesn't already include them (`rustup component add rustfmt clippy`). To apply automatic formatting, run `cargo fmt --all`.
 
-Commit the generated `Cargo.lock` when you perform the first successful build, and use `cargo build --release --locked` for subsequent reproducible dependency resolution.
+`Cargo.lock` **is included**; keep it committed. The `--locked` flag ensures Cargo uses the locked dependency versions rather than silently updating them. These checks also run in GitHub Actions on Windows and Linux. The release-mode test run avoids very slow *unoptimized* password-derivation tests.
 
 ## Quick start
 
@@ -133,6 +135,12 @@ See [docs/PROTOCOL.md](docs/PROTOCOL.md) for the complete request format, securi
 - `src/storage.rs` – bounded file IO and safe replacement
 - `tests/integration.rs` – end-to-end tests
 - `docs/` – format, security, and machine-interface specifications
-- `.github/workflows/ci.yml` – build and tests on Windows and Linux
+- `.github/workflows/ci.yml` – formatting, Clippy, optimized tests and release builds on Windows and Linux
+- `docs/RELEASE.md` – release checklist, checksums, and artifact verification
+- `cfgtool-benchmark.ps1` – optional Windows benchmark (synthetic data only)
+
+## Publishing releases
+
+This repository contains source code, **not a pre-signed binary**. Before publishing the first release, follow [docs/RELEASE.md](docs/RELEASE.md) for the build, test, checksum, and GitHub Release steps. Checksums detect changes against a **trusted** expected digest; they are not digital signatures.
 
 Licensed under MIT. Contributions and bug reports are welcome.

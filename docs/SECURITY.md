@@ -10,5 +10,8 @@
 - Password strings and decrypted byte buffers are zeroized where practical. A separate process cannot guarantee that operating-system swap, caller memory, or captured stdout are secure. Use appropriate local permissions and avoid logging secrets.
 - Decrypting into plaintext requires an explicit flag in the CLI. RPC rejects accidental replacement of encrypted files with plaintext unless `allow_plaintext:true` is provided.
 - File encryption does not prevent file deletion, rollback to an older valid file, or unauthorized reads of configuration already loaded into a running application.
+- Concurrent updates are **not serialized**: different writers can overwrite each other's changes (last completed writer wins). Callers must coordinate concurrent modifications and avoid editing the same file concurrently.
+- File replacement uses the destination filesystem's behavior and permissions; on Windows it can fail if another process holds an incompatible file handle. Replacing a file may not retain the old file's access control metadata. Always apply appropriate directory/file permissions.
+- The encrypted file format is a password-protected data format, **not** a guarantee that the executable itself is authentic. Verify executables separately (see [RELEASE.md](RELEASE.md)).
 
 Security-sensitive use should follow a successful build, complete automated test run, and platform-specific smoke testing. No formal security audit is claimed.
