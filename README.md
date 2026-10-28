@@ -144,3 +144,7 @@ See [docs/PROTOCOL.md](docs/PROTOCOL.md) for the complete request format, securi
 This repository contains source code, **not a pre-signed binary**. Before publishing the first release, follow [docs/RELEASE.md](docs/RELEASE.md) for the build, test, checksum, and GitHub Release steps. Checksums detect changes against a **trusted** expected digest; they are not digital signatures.
 
 Licensed under MIT. Contributions and bug reports are welcome.
+
+## Author
+
+Created and maintained by Siavash Ashkiani.

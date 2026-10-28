@@ -2,6 +2,7 @@
 name = "cfgtool"
 version = "0.1.0"
 edition = "2021"
+authors = ["Siavash Ashkiani"]
 description = "A small configuration CLI with JSON, XML, dotenv, and authenticated encryption"
 license = "MIT"
 readme = "README.md"
